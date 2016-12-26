@@ -16,11 +16,13 @@ loop() ->
 	end.
 
 ask(Pid) ->
-	rpc(Pid, time).
+	rpc(Pid, time, 1000).
 
-rpc(Pid, Request) ->
+rpc(Pid, Request, Timeout) ->
 	Pid ! {self(), Request},
 	receive
 		{Pid, Response} ->
 			Response
+	after Timeout ->
+		io:fwrite('Timeout.')
 	end.
