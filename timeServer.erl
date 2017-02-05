@@ -45,25 +45,10 @@ loop() ->
 	end.
 
 ask() ->
-	rpc(time).
+	workerRpc(time).
 
 stop() ->
-	rpc(stop).
+	workerRpc(stop).
 
-rpc(Request) ->
-	Pid = whereis(timeServerWorker),
-	case Pid of
-		undefined ->
-			io:format('Server isn\'t started.~n');
-		_ ->
-			rpc(Pid, Request, 1000)
-	end.
-
-rpc(Pid, Request, Timeout) ->
-	Pid ! {self(), Request},
-	receive
-		{Pid, Response} ->
-			Response
-	after Timeout ->
-		io:fwrite('Timeout.')
-	end.
+workerRpc(Request) ->
+	commonUtils:rpcByName(timeServerWorker, Request, 1000).
