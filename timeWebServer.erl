@@ -1,5 +1,5 @@
 -module(timeWebServer).
--export([start/1, stop/0, time/3, test1/2]).
+-export([start/1, stop/0, time/3]).
 
 start(Port) ->
 	inets:start(),
