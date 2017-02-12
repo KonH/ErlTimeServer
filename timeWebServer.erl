@@ -13,7 +13,7 @@ start(Port) ->
 				{document_root,"."},
 				{modules,[mod_esi]},
 				{erl_script_alias, {"/time", [timeWebServer]}},
-				{bind_address, "localhost"}
+				{bind_address, "0.0.0.0"}
 			]),
 	Pid.
 
